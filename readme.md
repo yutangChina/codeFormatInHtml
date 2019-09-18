@@ -1,1 +1,12 @@
-
+<div>目的：</div>
+<div>美化代码在HTML中的展示</div>
+<div>用法：</div>
+<div>
+将代码直接粘贴在&lt;cat-code&gt;中，在需要的地方codeFormat.start()来启动代码美化。
+</div>
+<div>
+   目前只支持JS代码的初步优化。
+</div>
+<div>
+   原码在index.html文件的script中。
+</div>
