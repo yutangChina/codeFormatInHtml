@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .cat-code {
+            background: #dddddd80;
+            color: #17a2b8;
+            width: 100%;
+            padding: 16px;
+            border-radius: 4px;
+            margin: 8px 0px;
+        }
+
+        * {
+            font-family: fantasy
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:800px;margin:auto">
+        <div class="cat-code">
+            <cat-code>
+                var a = function(a,b,c){
+                var aa = 1;
+                var bb = 2;
+                return {
+                a:1,
+                b:1
+                }
+                }
+                var a = function(a,b,c){
+                var aa = 1;
+                var bb = 2;
+                return {
+                a:1,
+                b:1
+                }
+                }
+            </cat-code>
+        </div>
+    </div>
+    <script>
+        /**
+     * 代码美化方法
+     */
+        window.codeFormat = {
+            start: function () {
+                var eles = document.querySelectorAll("cat-code");
+                for (var i = 0; i < eles.length; i++) {
+                    var ele = eles[i];
+                    var innerText = ele.innerText;
+                    var _t = innerText.replace(/\s\s+/g, "");
+                    var charArray = [];
+                    var level = 0;
+                    var k = "&nbsp;&nbsp;";
+                    for (var j = 0; j < _t.length; j++) {
+                        var _c = _t[j];
+                        switch (_c) {
+                            case ";":
+                                _c = _c + "<br/>" + k.repeat(level + 1);
+                                break;
+                            case "{":
+                                level += 1;
+                                _c = _c + "<br/>" + k.repeat(level + 1);
+                                break;
+                            case "}":
+                                level -= 1;
+                                _c = (level == 0 ? "" : k.repeat(level + 1)) + _c + "<br/>";
+                                if (charArray[j - 1] === " " && charArray[j - 2].indexOf("<br/>") < 0) {
+                                    charArray[j - 2] = charArray[j - 2] + "<br/>";
+                                }
+                                break;
+                            case "(":
+                            case ")":
+                                _c = _c + "&nbsp;";
+                                break;
+                            case ",":
+                                _c = "&nbsp;" + _c;
+                                break;
+
+                        }
+                        charArray.push(_c);
+                    }
+
+                    var _ts = charArray.join("");
+            
+                    ele.innerHTML = _ts;
+                }
+            }
+        }
+        codeFormat.start();
+    </script>
+</body>
+
+</html>
